@@ -265,7 +265,7 @@ namespace WorldMercatorMeterTool.ViewModel
 
         private void Convert()
         {
-            Center = lonLat2Mercator(new Position(Centerlongitude, Centerlatitude));
+            Center = Utils.lonLat2Mercator(new Position(Centerlongitude, Centerlatitude));
             ConvertResult = $"X:{Center.X},Y:{Center.Y}";
         }
 
@@ -286,7 +286,7 @@ namespace WorldMercatorMeterTool.ViewModel
         {
             if (convert)
             {
-                position = lonLat2Mercator(new Position(position.X, position.Y));
+                position = Utils.lonLat2Mercator(new Position(position.X, position.Y));
             }
             var pictureSize = Math.Pow(4, _Level);
             var sizecount = ((Bounds[2] - Bounds[0]) / (pictureSize / Math.Pow(2, _Level)));
@@ -338,16 +338,7 @@ namespace WorldMercatorMeterTool.ViewModel
         #endregion
 
 
-        public Position lonLat2Mercator(Position lonLat)
-        {
-            Position mercator = new Position();
-            double x = lonLat.X * 20037508.34 / 180;
-            double y = Math.Log(Math.Tan((90 + lonLat.Y) * Math.PI / 360)) / (Math.PI / 180);
-            y = y * 20037508.34 / 180;
-            mercator.X = x;
-            mercator.Y = y;
-            return mercator;
-        }
+
 
         private string GetUrl(int level, object x, object y, out string filanme)
         {

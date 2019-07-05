@@ -53,6 +53,32 @@ namespace WorldMercatorMeterTool
 
             
         }
+        public static Position lonLat2Mercator(Position lonLat)
+        {
+            Position mercator = new Position();
+            double x = lonLat.X * 20037508.3427892 / 180;
+            double y = Math.Log(Math.Tan((90 + lonLat.Y) * Math.PI / 360)) / (Math.PI / 180);
+            y = y * 20037508.3427892 / 180;
+            mercator.X = x;
+            mercator.Y = y;
+            return mercator;
+        }
+
+        /// <summary>
+        /// Web墨卡托转经纬度
+        /// </summary>
+        /// <param name="x">X坐标值（单位：米）</param>
+        /// <param name="y">Y坐标值（单位：米）</param>
+        /// <returns>转换后的位置</returns>
+        public static Position WebMercatorMeter2Degree(double x, double y)
+        {
+            var xValue = x / 20037508.3427892 * 180;
+            var yValue = y / 20037508.3427892 * 180;
+            yValue = 180 / Math.PI * (2 * Math.Atan(Math.Exp(yValue * Math.PI / 180)) - Math.PI / 2);
+            var longitude = xValue;
+            var latitude = yValue;
+            return new Position(longitude, latitude);
+        }
     }
 
     public class Position
