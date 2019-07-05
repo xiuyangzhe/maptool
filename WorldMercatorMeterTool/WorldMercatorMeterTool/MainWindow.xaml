@@ -1,0 +1,84 @@
+﻿<Window x:Class="WorldMercatorMeterTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorldMercatorMeterTool"
+        mc:Ignorable="d"
+        Title="地图离线获取工具" WindowState="Maximized" FontSize="15" WindowStartupLocation="CenterScreen" MouseWheel="MainWindow_OnMouseWheel" DataContext="{Binding Source={StaticResource Locator},Path=Main}">
+    <Grid>
+        <StackPanel>
+            <StackPanel VerticalAlignment="Top">
+                <TextBlock>经纬度转World墨卡托</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>经度：</TextBlock>
+                    <TextBox Width="100" HorizontalAlignment="Left" Text="{Binding Centerlongitude}"></TextBox>
+                    <TextBlock Margin="20,0,0,0">纬度：</TextBlock>
+                    <TextBox Width="100" HorizontalAlignment="Left" Text="{Binding Centerlatitude}"></TextBox>
+                    <Button Margin="10,0,0,0" Command="{Binding ConvertCommand}">转换</Button>
+                    <TextBlock Margin="10,0,0,0">级别：</TextBlock>
+                    <TextBox Width="50" Text="{Binding Level}"></TextBox>
+                    <Button  Margin="10,0,0,0" Command="{Binding CenterShowComand}">中心点瓦片</Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>墨卡托坐标:</TextBlock>
+                    <TextBox IsReadOnly="True"  Text="{Binding ConvertResult,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>瓦片范围:</TextBlock>
+                    <TextBox IsReadOnly="True" Text="{Binding MappictureResult,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="200">
+                        <TextBlock>左上角:</TextBlock>
+                        <TextBox Text="{Binding LeftTop}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Width="200">
+                        <TextBlock>左下角:</TextBlock>
+                        <TextBox Text="{Binding LeftBottom}"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="200">
+                        <TextBlock >右上角:</TextBlock>
+                        <TextBox Text="{Binding RightTop}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Width="200">
+                        <TextBlock>右下角:</TextBlock>
+                        <TextBox Text="{Binding RightBottom}"></TextBox>
+                    </StackPanel>
+                    <StackPanel  VerticalAlignment="Top" Margin="20,0,0,0">
+                        <TextBlock>级别范围：</TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding Downloadmin}"></TextBox>
+                            <TextBox Margin="20,0,0,0" Text="{Binding Downloadmax}"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Margin="10,0,0,0" Command="{Binding DownLoadCommand}">下载</Button>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>下载数量：</TextBlock>
+                            <TextBlock Text="{Binding DownLoadCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>下载错误：</TextBlock>
+                            <TextBlock Text="{Binding DownLoadErrorCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>已下载：</TextBlock>
+                            <TextBlock Text="{Binding DownLoadedCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Grid x:Name="mainshow" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <!--<ScrollViewer Width="1000" Height="600">
+                    <Image x:Name="showimage" Width="256" Height=" 256"></Image>
+                </ScrollViewer>-->
+                
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</Window>
